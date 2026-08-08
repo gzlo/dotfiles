@@ -25,6 +25,10 @@ hl.on("hyprland.start", function ()
     -- Start listeners
     hl.exec_cmd("~/.config/ml4w/listeners.sh --startall")
 
+    -- STT voice dictation daemon (Copilot key -> whisper.cpp, fork customization)
+    -- Idempotent: skip when the xentor-dotfiles overlay (custom.lua) already started it
+    hl.exec_cmd("pgrep -f stt-voice-daemon.py >/dev/null || nohup ~/.local/bin/stt-voice-daemon.py > /dev/null 2>&1 &")
+
     -- Start waybar
     hl.exec_cmd(HOME .. "/.config/waybar/launch.sh")
 

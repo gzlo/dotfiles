@@ -32,8 +32,8 @@ hl.on("hyprland.start", function ()
     -- Start waybar
     hl.exec_cmd(HOME .. "/.config/waybar/launch.sh")
 
-    -- Start polkit daemon
-    hl.exec_cmd("/usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1")
+    -- Start polkit daemon (Fedora 44+: hyprpolkitagent replaces polkit-gnome)
+    hl.exec_cmd("/usr/libexec/hyprpolkitagent")
 
     -- Restore wallpaper (skip for quickshell — handled inside ml4w-autostart)
     if wallpaper_app ~= "quickshell" then

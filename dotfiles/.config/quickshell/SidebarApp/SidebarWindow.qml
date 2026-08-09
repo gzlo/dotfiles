@@ -309,6 +309,13 @@ PanelWindow {
                         Quickshell.execDetached(["hyprmod"])
                     }
                 }
+                ML4WButton {
+                    text: "Power"
+                    onClicked: {
+                        root.isOpen = false
+                        Quickshell.execDetached(["ml4w-power-panel.py"])
+                    }
+                }
             }
 
             Rectangle { Layout.fillWidth: true; implicitHeight: 1; color: Theme.primary; opacity: 0.3 }

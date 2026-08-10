@@ -27,7 +27,9 @@ hl.on("hyprland.start", function ()
 
     -- STT voice dictation daemon (Copilot key -> whisper.cpp, fork customization)
     -- Idempotent: skip when the xentor-dotfiles overlay (custom.lua) already started it
-    hl.exec_cmd("pgrep -f stt-voice-daemon.py >/dev/null || nohup ~/.local/bin/stt-voice-daemon.py > /dev/null 2>&1 &")
+    -- Guard anti-self-match: anchored ^python3 matches only the real daemon
+    -- ("python3 /home/.../stt-voice-daemon.py"), never this shell itself.
+    hl.exec_cmd("pgrep -f '^python3 .*stt-voice-daemon.py' >/dev/null || nohup ~/.local/bin/stt-voice-daemon.py > /dev/null 2>&1 &")
 
     -- Start waybar
     hl.exec_cmd(HOME .. "/.config/waybar/launch.sh")
